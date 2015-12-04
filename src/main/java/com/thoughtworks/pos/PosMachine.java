@@ -7,9 +7,11 @@ import java.util.List;
 
 public final class PosMachine {
     private final List<Item> allItems;
+    private final PromotionManager promotionManager;
 
-    public PosMachine(final List<Item> allItems) {
+    public PosMachine(final List<Item> allItems, PromotionManager promotionManager) {
         this.allItems = allItems;
+        this.promotionManager = promotionManager;
     }
 
     public double calculate(final List<CartItem> cartItems) {
@@ -23,7 +25,10 @@ public final class PosMachine {
     private double calculateSubtotal(final CartItem cartItem) {
         String barcode = cartItem.getBarcode();
         double originPrice = queryItemPrice(barcode);
-        return cartItem.getQuantity() * originPrice;
+        DiscountPromotion availablePromotion = promotionManager.getAvailablePromotion(barcode);
+        double subtotal = availablePromotion != null ?  availablePromotion.apply(cartItem, originPrice) :
+                cartItem.getQuantity() * originPrice;
+        return subtotal;
     }
 
     private double queryItemPrice(final String barcode) {

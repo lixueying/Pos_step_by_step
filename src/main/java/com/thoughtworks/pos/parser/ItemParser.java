@@ -11,10 +11,13 @@ public class ItemParser extends Parser<Item> {
 
     @Override
     protected Item parseLine(final String line) {
-        String barcode = line.split(":")[0];
-        double price = Double.parseDouble(line.split(":")[1]);
+        String[] splitString = line.split(":");
+        String barcode = splitString[0];
+        double price = Double.parseDouble(splitString[1]);
         return new Item(barcode, price);
     }
+
+
 
     @Override
     protected Pattern getPattern() {

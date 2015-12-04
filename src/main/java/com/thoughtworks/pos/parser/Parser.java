@@ -1,7 +1,6 @@
 package com.thoughtworks.pos.parser;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public abstract class Parser<T> {
