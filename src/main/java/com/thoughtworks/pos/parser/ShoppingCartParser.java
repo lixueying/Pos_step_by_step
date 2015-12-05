@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 import static java.util.regex.Pattern.compile;
 
 public class ShoppingCartParser extends Parser<CartItem> {
-    private static final Pattern PATTERN = compile("^(\\w+)-(\\d+)$");
+    private static final Pattern PATTERN = compile("^\\w+-\\d+$");
 
     @Override
     protected CartItem parseLine(final String line) {

@@ -26,7 +26,8 @@ public final class PosMachine {
         String barcode = cartItem.getBarcode();
         double originPrice = queryItemPrice(barcode);
         DiscountPromotion availablePromotion = promotionManager.getAvailablePromotion(barcode);
-        double subtotal = availablePromotion != null ?  availablePromotion.apply(cartItem, originPrice) :
+        double subtotal = availablePromotion != null ?
+                availablePromotion.apply(cartItem, originPrice) :
                 cartItem.getQuantity() * originPrice;
         return subtotal;
     }

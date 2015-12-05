@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 import static java.util.regex.Pattern.compile;
 
 public class ItemParser extends Parser<Item> {
-    private static final Pattern PATTERN = compile("^(\\w+):(\\d+)$");
+    private static final Pattern PATTERN = compile("^\\w+:\\d+$");
 
     @Override
     protected Item parseLine(final String line) {
