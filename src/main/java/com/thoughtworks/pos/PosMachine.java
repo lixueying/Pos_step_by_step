@@ -8,6 +8,7 @@ import java.util.List;
 public final class PosMachine {
     private final List<Item> allItems;
     private final PromotionManager promotionManager;
+    private DiscountPromotion discountPromotion;
 
     public PosMachine(final List<Item> allItems, PromotionManager promotionManager) {
         this.allItems = allItems;
@@ -23,13 +24,27 @@ public final class PosMachine {
     }
 
     private double calculateSubtotal(final CartItem cartItem) {
+        double subtotalAfterSecondHalfPrice;
         String barcode = cartItem.getBarcode();
         double originPrice = queryItemPrice(barcode);
         DiscountPromotion availablePromotion = promotionManager.getAvailablePromotion(barcode);
-        double subtotal = availablePromotion != null ?
+        double subtotalAfterDiscount = availablePromotion != null ?
                 availablePromotion.apply(cartItem, originPrice) :
                 cartItem.getQuantity() * originPrice;
-        return subtotal;
+        int a = cartItem.getQuantity();
+        double originPriceAfterDiscount = subtotalAfterDiscount/cartItem.getQuantity();
+
+        discountPromotion = new DiscountPromotion();
+
+        boolean isSecondHalf = promotionManager.isSecondHalfPrice(barcode);
+        if(subtotalAfterDiscount == cartItem.getQuantity() * originPrice){
+            subtotalAfterSecondHalfPrice = isSecondHalf == true ?
+                    discountPromotion.secondHalfPrice(cartItem, originPrice) : cartItem.getQuantity() * originPrice;
+        }else {
+            subtotalAfterSecondHalfPrice = isSecondHalf == true ?
+                    availablePromotion.secondHalfPrice(cartItem, originPriceAfterDiscount) : subtotalAfterDiscount;
+        }
+        return subtotalAfterSecondHalfPrice;
     }
 
     private double queryItemPrice(final String barcode) {

@@ -17,8 +17,6 @@ public class ItemParser extends Parser<Item> {
         return new Item(barcode, price);
     }
 
-
-
     @Override
     protected Pattern getPattern() {
         return PATTERN;

@@ -12,4 +12,7 @@ public final class ShopData {
 
     public static final List<String> DISCOUNT_ITEMS =
             Arrays.asList("ITEM000001:75", "ITEM000005:90");
+
+    public static final List<String> SECOND_HALF_PRICE_PROMOTION =
+        Arrays.asList("ITEM000001", "ITEM000003");
 }

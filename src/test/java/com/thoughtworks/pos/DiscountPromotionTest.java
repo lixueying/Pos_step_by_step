@@ -33,4 +33,11 @@ public class DiscountPromotionTest {
 
         assertThat(subtotal, is(30d));
     }
+
+    @Test
+    public void should_return_second_half_prive(){
+        discountPromotion = new DiscountPromotion(75);
+        double subtotal = discountPromotion.secondHalfPrice(new CartItem("ITEM000001", 2), 40);
+        assertThat(subtotal, is(60d));
+    }
 }

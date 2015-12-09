@@ -69,7 +69,7 @@ public class PosMachineTest {
 
         double total = posMachine.calculate(itemCart);
 
-        assertThat(total, is(165d));
+        assertThat(total, is(150d));
     }
 
 
