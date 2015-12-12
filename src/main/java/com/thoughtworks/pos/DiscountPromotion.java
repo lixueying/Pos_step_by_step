@@ -2,7 +2,7 @@ package com.thoughtworks.pos;
 
 import com.thoughtworks.pos.domain.CartItem;
 
-public class DiscountPromotion {
+public class DiscountPromotion implements Discount{
     private double discountRatio;
 
     public DiscountPromotion(){
